@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use DB;
 use Illuminate\Http\Request;
-use App\Imports\FileImport;
+use App\Imports\FileImport; //File import class for csv upload functionality (Laravel Excel Package)
 use App\Models\FileUpload;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -14,7 +14,7 @@ class FileUploadController extends Controller
         return view('upload');
     }
 
-    public function uploadFile(Request $request) {
+    public function uploadFile(Request $request) { //upload function for the csv file
         $request->validate([
             'file' => 'required|file|mimes:csv' //validate if file is csv format
         ]);
@@ -37,7 +37,7 @@ class FileUploadController extends Controller
         return redirect('/')->with('success', "File($filename) imported!");
     }
 
-    public function showTable() {
+    public function showTable() { //show all the contents of the csv file
         $records = FileUpload::paginate(10);
 
         if(count($records) > 0) {
@@ -48,7 +48,7 @@ class FileUploadController extends Controller
         }
     }
 
-    public function search(Request $request) {
+    public function search(Request $request) { //search function
         $search = $request->input('search');
 
         $posts = FileUpload::query()
@@ -70,7 +70,7 @@ class FileUploadController extends Controller
        }
     }
 
-    public function filterBy(Request $request) {
+    public function filterBy(Request $request) { //filter function
        $selected = $request->input('sort');
 
        if($selected == 'year' || $selected == 'rank' || $selected == 'tied') {

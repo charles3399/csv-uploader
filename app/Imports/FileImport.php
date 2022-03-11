@@ -4,16 +4,16 @@ namespace App\Imports;
 
 use App\Models\FileUpload;
 use Maatwebsite\Excel\Concerns\ToModel;
-use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithHeadingRow; //Heading Row class to detect headers in a csv file
 
-class FileImport implements ToModel, WithHeadingRow
+class FileImport implements ToModel, WithHeadingRow // include the WithHeadingRow when using it
 {
     /**
     * @param array $row
     *
     * @return \Illuminate\Database\Eloquent\Model|null
     */
-    public function model(array $row)
+    public function model(array $row) //function to insert csv contents to database
     {
         return new FileUpload([
             'year' => $row['year'],
