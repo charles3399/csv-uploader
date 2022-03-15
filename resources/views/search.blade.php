@@ -45,7 +45,7 @@
             </div>
             <div class="card-body">
                 @if (session()->has('warning'))
-                    <div class="alert alert-warning my-1">
+                    <div class="alert alert-danger my-1">
                         <strong>{{ session('warning') }}</strong>
                     </div>
                 @endif
@@ -61,9 +61,9 @@
                             <th>Title</th>
                         </tr>
                     </thead>
+                    <tbody>
                     @if (count($posts) > 0)
                         @foreach ($posts as $row)
-                        <tbody>
                             <tr>
                                 <td>{{$row->year}}</td>
                                 <td>{{$row->rank}}</td>
@@ -73,13 +73,13 @@
                                 <td>{{$row->tied}}</td>
                                 <td>{{$row->title}}</td>
                             </tr>
-                        </tbody>
                         @endforeach
                     @else
-                        <div class="alert alert-warning text-center">
+                        <div class="alert alert-danger text-center">
                             <strong>No data found</strong>
                         </div>
                     @endif
+                    </tbody>
                 </table>
                 {{ $posts->withQueryString()->links() }}
                 {{-- Without withQueryString the next page of pagination will not work --}}

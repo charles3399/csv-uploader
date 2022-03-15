@@ -45,7 +45,7 @@
             </div>
             <div class="card-body">
                 @if (session()->has('warning'))
-                    <div class="alert alert-warning my-1">
+                    <div class="alert alert-danger my-1">
                         <strong>{{ session('warning') }}</strong>
                     </div>
                 @endif
@@ -61,25 +61,25 @@
                             <th>Title</th>
                         </tr>
                     </thead>
-                    @if (count($sorts) > 0)
-                        @foreach ($sorts as $row)
-                        <tbody>
-                            <tr>
-                                <td>{{$row->year}}</td>
-                                <td>{{$row->rank}}</td>
-                                <td>{{$row->recipient}}</td>
-                                <td>{{$row->country}}</td>
-                                <td>{{$row->career}}</td>
-                                <td>{{$row->tied}}</td>
-                                <td>{{$row->title}}</td>
-                            </tr>
-                        </tbody>
-                        @endforeach
-                    @else
-                        <div class="alert alert-warning text-center">
-                            <strong>No data found</strong>
-                        </div>
-                    @endif
+                    <tbody>
+                        @if (count($sorts) > 0)
+                            @foreach ($sorts as $row)
+                                <tr>
+                                    <td>{{$row->year}}</td>
+                                    <td>{{$row->rank}}</td>
+                                    <td>{{$row->recipient}}</td>
+                                    <td>{{$row->country}}</td>
+                                    <td>{{$row->career}}</td>
+                                    <td>{{$row->tied}}</td>
+                                    <td>{{$row->title}}</td>
+                                </tr>
+                            @endforeach
+                        @else
+                            <div class="alert alert-danger text-center">
+                                <strong>No data found</strong>
+                            </div>
+                        @endif
+                    </tbody>
                 </table>
                 {{ $sorts->withQueryString()->links() }}
                 {{-- Without withQueryString the next page of pagination will not work --}}
