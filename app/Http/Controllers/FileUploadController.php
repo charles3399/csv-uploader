@@ -10,6 +10,11 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class FileUploadController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index() {
         return view('upload');
     }
@@ -34,7 +39,7 @@ class FileUploadController extends Controller
             Excel::import(new FileImport, $csv_file);
         }
 
-        return redirect('/')->with('success', "File($filename) imported!");
+        return redirect('table')->with('success', "File: <i>$filename</i> successfully uploaded");
     }
 
     public function showTable() { //show all the contents of the csv file

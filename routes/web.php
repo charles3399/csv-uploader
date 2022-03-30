@@ -14,9 +14,13 @@ use App\Http\Controllers\FileUploadController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes();
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/', [FileUploadController::class, 'index']);
-Route::get('table', [FileUploadController::class, 'showTable'])->name('table');
-Route::get('search', [FileUploadController::class, 'search'])->name('search');
-Route::get('filter', [FileUploadController::class, 'filterBy'])->name('filter');
-Route::post('upload-file', [FileUploadController::class, 'uploadFile'])->name('upload-file');
+Route::middleware(['auth'])->group(function(){
+    Route::get('/home', [FileUploadController::class, 'index']);
+    Route::get('table', [FileUploadController::class, 'showTable'])->name('table');
+    Route::get('search', [FileUploadController::class, 'search'])->name('search');
+    Route::get('filter', [FileUploadController::class, 'filterBy'])->name('filter');
+    Route::post('upload-file', [FileUploadController::class, 'uploadFile'])->name('upload-file');
+});
